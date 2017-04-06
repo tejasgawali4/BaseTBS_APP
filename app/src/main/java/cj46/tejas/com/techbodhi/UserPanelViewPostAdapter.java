@@ -21,7 +21,7 @@ import java.util.HashMap;
  * Created by Carl_johnson on 2/2/2017.
  */
 
-public class ViewPostAdapter extends BaseAdapter
+public class UserPanelViewPostAdapter extends BaseAdapter
 {
 
     private static LayoutInflater inflater = null;
@@ -30,7 +30,7 @@ public class ViewPostAdapter extends BaseAdapter
     private Activity activity;
     private ArrayList<HashMap<String ,String>> data;
 
-    public ViewPostAdapter(Activity a, ArrayList d, Resources resLoc)
+    public UserPanelViewPostAdapter(Activity a, ArrayList d, Resources resLoc)
     {
         activity = a;
         data = d;
@@ -44,7 +44,7 @@ public class ViewPostAdapter extends BaseAdapter
     public int getCount()
     {
         if(data.size()<= 0)
-        return 1;
+            return 1;
         return data.size();
     }
 
@@ -66,27 +66,29 @@ public class ViewPostAdapter extends BaseAdapter
 
         if(convertView == null)
         {
-            vi = inflater.inflate(R.layout.view_post_list,null);
+            vi = inflater.inflate(R.layout.view_list_userpanelpost,null);
 
             holder = new ViewHolder();
             holder.company_id = (TextView) vi.findViewById(R.id.p_id);
             holder.company_name = (TextView) vi.findViewById(R.id.companyName);
-            holder.note = (TextView) vi.findViewById(R.id.Note);
             holder.deadline = (TextView) vi.findViewById(R.id.deadline);
-            holder.companyProfile = (TextView) vi.findViewById(R.id.companyProfile);
             holder.companyCode = (TextView) vi.findViewById(R.id.CompanyCode);
-            holder.JobDiscription = (TextView) vi.findViewById(R.id.jobDiscription);
+            holder.SalaryRange = (TextView) vi.findViewById(R.id.salaryRange);
+            holder.percentage = (TextView) vi.findViewById(R.id.Percentage);
+
+
+/*          holder.note = (TextView) vi.findViewById(R.id.Note);
+            holder.companyProfile = (TextView) vi.findViewById(R.id.companyProfile);
             holder.OtherSkills = (TextView) vi.findViewById(R.id.OtherSkills);
+            holder.JobDiscription = (TextView) vi.findViewById(R.id.jobDiscription);
             holder.Responsiblity = (TextView) vi.findViewById(R.id.Responsibility);
             holder.SkillsRequired = (TextView) vi.findViewById(R.id.SkillsRequired);
-            holder.percentage = (TextView) vi.findViewById(R.id.Percentage);
-            holder.SalaryRange = (TextView) vi.findViewById(R.id.salaryRange);
             holder.InterviewProcess = (TextView) vi.findViewById(R.id.InterviewProcess);
             holder.JobLocation = (TextView) vi.findViewById(R.id.JobLoction);
-            holder.TestLocation = (TextView) vi.findViewById(R.id.testLocation);
+            holder.TestLocation = (TextView) vi.findViewById(R.id.testLocation);*/
 
 
-            holder.btnViewPostDetails = (Button) vi.findViewById(R.id.btnViewPostDetails);
+            holder.btnViewPostDetails = (Button) vi.findViewById(R.id.btnviewMoreUserPanel);
 
             vi.setTag(holder);
         }
@@ -104,29 +106,33 @@ public class ViewPostAdapter extends BaseAdapter
 
                 holder.company_id.setText(tempValues.get("p_id").toString());
                 holder.company_name.setText(tempValues.get("p_companyName").toString());
-                holder.note.setText(tempValues.get("p_note").toString());
                 holder.deadline.setText(tempValues.get("p_deadline").toString());
-                holder.companyProfile.setText(tempValues.get("p_companyProfile").toString());
                 holder.companyCode.setText(tempValues.get("p_companyCode").toString());
-                holder.JobDiscription.setText(tempValues.get("p_jobDescription").toString());
+                holder.percentage.setText(tempValues.get("p_percentageCriteria").toString());
+                holder.SalaryRange.setText(tempValues.get("p_salaryRange").toString());
+
+
+/*              holder.note.setText(tempValues.get("p_note").toString());
+                holder.companyProfile.setText(tempValues.get("p_companyProfile").toString());
                 holder.OtherSkills.setText(tempValues.get("p_otherSkills").toString());
                 holder.Responsiblity.setText(tempValues.get("p_responsibility").toString());
                 holder.SkillsRequired.setText(tempValues.get("p_skillsRequired").toString());
-                holder.percentage.setText(tempValues.get("p_percentageCriteria").toString());
-                holder.SalaryRange.setText(tempValues.get("p_salaryRange").toString());
                 holder.InterviewProcess.setText(tempValues.get("p_interviewProcess").toString());
                 holder.JobLocation.setText(tempValues.get("p_jobLocation").toString());
-                holder.TestLocation.setText(tempValues.get("p_testLocation").toString());
-                holder.btnViewPostDetails = (Button) vi.findViewById(R.id.btnViewPostDetails);
+                holder.TestLocation.setText(tempValues.get("p_testLocation").toString());*/
+
+
+                holder.btnViewPostDetails = (Button) vi.findViewById(R.id.btnviewMoreUserPanel);
 
                 holder.btnViewPostDetails.setOnClickListener(new View.OnClickListener()
                 {
-                    @Override
-                    public void onClick(View v) {
-                        String id =(String) tempValues.get("p_id");
-                        post_id = id;
-                        EditUser();
-                    }
+                        @Override
+                        public void onClick(View v)
+                        {
+                            String id =(String) tempValues.get("p_id");
+                            post_id = id;
+                            EditUser();
+                        }
                 });
                 vi.setTag(holder);
 
@@ -139,7 +145,7 @@ public class ViewPostAdapter extends BaseAdapter
     public void EditUser()
     {
 
-        Intent i = new Intent(activity.getApplicationContext(), ViewPostDetails.class );
+        Intent i = new Intent(activity.getApplicationContext(), UserPanelViewPostDetails.class );
         i.putExtra("pid",post_id);
         activity.startActivity(i);
 
@@ -149,8 +155,7 @@ public class ViewPostAdapter extends BaseAdapter
     public static class ViewHolder
     {
 
-        public TextView company_id ,company_name, note , deadline, companyProfile , companyCode ,JobDiscription , OtherSkills, Responsiblity ,SkillsRequired , percentage ,SalaryRange ,
-        InterviewProcess ,JobLocation , TestLocation;
+        public TextView company_id , company_name , deadline , companyCode , percentage , SalaryRange;
         Button btnViewPostDetails;
 
     }
@@ -162,14 +167,14 @@ public class ViewPostAdapter extends BaseAdapter
         OnItemClickListener(int position)
         {
             mPostion = position;
-            System.out.println("id"+mPostion);
+            System.out.println("id" + mPostion);
         }
 
         @Override
         public void onClick(View v)
         {
 
-            ViewPosts obj=(ViewPosts) activity;
+            UserPanelViewPost obj=(UserPanelViewPost) activity;
 
             obj.onItemClick(mPostion);
 

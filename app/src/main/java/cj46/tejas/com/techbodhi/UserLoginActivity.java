@@ -67,17 +67,21 @@ public class UserLoginActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.addPost) {
-            // Handle the camera action
-            Intent i = new Intent(UserLoginActivity.this, AddPost.class);
-            startActivity(i);
-        } else if (id == R.id.viewPost) {
-            Intent  i = new Intent(UserLoginActivity.this, ViewPosts.class);
-            startActivity(i);
-        } else if(id == R.id.logout) {
-            Intent i = new Intent(UserLoginActivity.this,LoginActivity.class);
-            startActivity(i);
-        }
+            if (id == R.id.addPost)
+            {   // Handle the camera action
+                Intent i = new Intent(UserLoginActivity.this, AddPost.class);
+                startActivity(i);
+            }
+            else if (id == R.id.UserPanelViewPost)
+            {
+                Intent  i = new Intent(UserLoginActivity.this, UserPanelViewPost.class);
+                startActivity(i);
+            }
+            else if(id == R.id.logout)
+            {
+                Intent i = new Intent(UserLoginActivity.this,LoginActivity.class);
+                startActivity(i);
+            }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -1,18 +1,12 @@
 package cj46.tejas.com.techbodhi;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -22,110 +16,62 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Carl_johnson on 12/5/2016.
- */
-public class ApproveUsers extends AppCompatActivity implements View.OnClickListener {
 
-    ArrayList<HashMap<String, String>> viewuserarray;
-    private String TAG = ViewPosts.class.getSimpleName();
-    private ProgressDialog pDialog;
-    private ListView ApproveListView;
-    private ImageButton btnApprove,btnReject;
-    private ImageView profileView;
+import static android.widget.Toast.LENGTH_LONG;
+
+public class ApproveUsers extends Activity {
+
+    ListView t;
+    ProgressDialog pDialog;
+    public ApproveUsers CustomListView = null;
+    public ArrayList<HashMap<String,String>> CustomListViewValuesArr;
+    ApproveUserAdapter adapter;
+    Resources res;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.approveusers);
+        CustomListView = this;
+        pDialog = new ProgressDialog(ApproveUsers.this);
+        /******** Take some data in Arraylist ( CustomListViewValuesArr ) ***********/
+        System.out.println("In MainActivity ... Before Setting List Data....");
+        CustomListViewValuesArr = new ArrayList<>();
 
-        viewuserarray = new ArrayList<>();
+        System.out.println("In MainActivity ... After Setting List Data....");
+        res = getResources();
+        t = (ListView) findViewById(R.id.ApproveUsers);  // List defined in XML ( See Below )
+        System.out.println("In onCreate...ApproveUSer class()...");
+        new Main().execute();
+        System.out.println("In onCreate...After Main Execute()...");
+        /**************** Create Custom Adapter *********/
 
-        ApproveListView = (ListView) findViewById(R.id.ApproveUsers);
-
-
-        new ApproveUser().execute();
 
     }
 
-    @Override
-    public void onClick(View v) {
-
-        if(btnApprove==v)
-        {
-            Approve();
-            Toast.makeText(ApproveUsers.this,"approve",Toast.LENGTH_SHORT).show();
-        }
-        if(btnReject==v)
-        {
-            Reject();
-            Toast.makeText(ApproveUsers.this,"Rejected..",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public void Approve()
+    public void onItemClick(int mPosition)
     {
+        System.out.println("In MainActivity...onItemClick()...");
+/*        Toast.makeText(getApplicationContext(),"This is Main Activity OnItemCLick", LENGTH_LONG).show();*/
+        System.out.println("In MainActivity...onItemClick()...");
 
-        final String u_id = "5";
-        final String status = "1";
-
-        class ApproveU extends AsyncTask<Void, Void, String> {
-
-            ProgressDialog loading;
-
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                loading = ProgressDialog.show(ApproveUsers.this, "Checking...", "Wait...", false, false);
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                loading.dismiss();
-
-                Toast.makeText(ApproveUsers.this, s, Toast.LENGTH_LONG).show();
-                if(s.equals("success"))
-                {
-                    //Navigate to Activity
-                    Intent i = new Intent(getApplicationContext(),MainActivity.class);
-                    startActivity(i);
-                }
-            }
-
-            @Override
-            protected String doInBackground(Void... v) {
-                HashMap<String, String> params = new HashMap<>();
-                params.put(Config.USER_ID, u_id);
-                params.put(Config.KEY_USER_STATUS, status);
-
-                HttpConnection rh = new HttpConnection();
-                String res = rh.sendPostRequest(Config.URL_APPROVE_user , params);
-                return res;
-            }
-        }
-
-        ApproveU aprv = new ApproveU();
-        aprv.execute();
-    }
-
-    public void Reject()
-    {
-        Toast.makeText(getApplicationContext(),"Rejected...",Toast.LENGTH_LONG).show();
     }
 
 
-    /**
-     * Async task class to get json by making HTTP call
-     */
+    /******
+     * Function to set data in ArrayList
+     *************/
 
-    protected class ApproveUser extends AsyncTask<Void, Void, Void> {
+
+    private class Main extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected void onPreExecute() {
+        protected void onPreExecute()
+        {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(ApproveUsers.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -135,13 +81,21 @@ public class ApproveUsers extends AppCompatActivity implements View.OnClickListe
         @Override
         public Void doInBackground(Void... arg0) {
             HttpConnection sh = new HttpConnection();
+            if(sh==null)
+            {
+                System.out.println("In setListData ... Checking HttpConnectioon....");
+            }else
+            {
+                System.out.println("In setListData in ELSE... Checking HttpConnectioon....");
+
+            }
 
             // Making a request to url and getting response
             String jsonStr = sh.sendGetRequest(Config.URL_APPROVAL_USER);
 
-            Log.e(TAG, "Response from url: " + jsonStr);
+           //System.out.println("json :- " +jsonStr);
 
-            if (jsonStr != null){
+            if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
 
@@ -152,55 +106,45 @@ public class ApproveUsers extends AppCompatActivity implements View.OnClickListe
                     for (int i = 0; i < result.length(); i++) {
                         JSONObject jsonResponce = result.getJSONObject(i);
 
-                        profileView = (ImageView) findViewById(R.id.profileuser);
                         String uid = jsonResponce.getString("u_id");
-                        String firstname = jsonResponce.getString("u_firstname");
+                        String firstname = jsonResponce.getString("u_fisrtname");
                         String lastname = jsonResponce.getString("u_lastname");
-                        btnApprove= (ImageButton) findViewById(R.id.btnApproveUser);
-                        btnReject= (ImageButton) findViewById(R.id.btnRejectUser);
+
+                       System.out.println("In MainActivity ... Setting List Data....uid ->" + uid + " u_firstname-->" +firstname+" u_lastname-->"+lastname);
 
 
-/*                        btnApprove.setTag(uid);
+                    /*  btnApprove.setTag(uid);
                         btnReject.setTag(uid);*/
 
-                        // tmp hash map for single contact
+/*                        final ListModel sched = new ListModel();
+
+                        // adding each child node to HashMap key => value
+                        sched.setUid("uid" + uid);
+                        sched.setFirstname("firstname" + firstname);
+                        sched.setLastname("lastname" + lastname);*/
                         HashMap<String, String> User = new HashMap<>();
 
                         // adding each child node to HashMap key => value
-                        User.put(Config.USER_ID,uid);
-                        User.put(Config.KEY_USER_FIRSTNAME, firstname);
-                        User.put(Config.KEY_USER_LASTNAME, lastname);
+                        User.put("u_id",uid);
+                        User.put("u_firstname", firstname);
+                        User.put("u_lastname", lastname);
+
+                        //  System.out.println("In MainActivity ... Setting List Data...." + i);
 
 
                         // adding contact to contact list
-                        viewuserarray.add(User);
+                        CustomListViewValuesArr.add(User);
                     }
                 } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    //     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                            Toast.makeText(getApplicationContext(),"Json parsing error: " + e.getMessage(),Toast.LENGTH_LONG).show();
                         }
                     });
                 }
-            } else {
-                Log.e(TAG, "Couldn't get json from server.");
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
-                                Toast.LENGTH_LONG)
-                                .show();
-                    }
-                });
             }
-
-
             return null;
         }
 
@@ -213,12 +157,18 @@ public class ApproveUsers extends AppCompatActivity implements View.OnClickListe
             /**
              * Updating parsed JSON data into ListView
              * */
-            ListAdapter adapter = new SimpleAdapter(
+            //System.out.println("In MainActivity ... Before MyListAdaper....");
+            adapter = new ApproveUserAdapter(CustomListView, CustomListViewValuesArr, res);
+            //System.out.println("In MainActivity ... After MyListAdaper....");
 
-                    ApproveUsers.this, viewuserarray, R.layout.view_userapprovals,
-                    new String[]{"firstname", "lastname"}, new int[]{R.id.u_firstname, R.id.u_lastname});
+            t.setAdapter(adapter);
 
-            ApproveListView.setAdapter(adapter);
         }
     }
+    /*****************
+     * This function used by adapter
+     ****************/
 }
+
+
+

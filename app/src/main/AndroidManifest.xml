@@ -44,13 +44,24 @@
             android:name=".ApproveUsers"
             android:theme="@style/AppTheme" />
         <activity
+            android:name=".ApprovePosts"
+            android:theme="@style/AppTheme"/>
+        <activity
             android:name=".ViewPostDetails"
             android:theme="@style/AppTheme"/>
+
         <activity
             android:name=".UserLoginActivity"
             android:label="@string/title_activity_user_login"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
+        <activity
+            android:name=".UserPanelViewPost"
+            android:theme="@style/AppTheme"/>
+
+        <activity
+            android:name=".UserPanelViewPostDetails"
+            android:theme="@style/AppTheme"/>
     </application>
 
 </manifest>

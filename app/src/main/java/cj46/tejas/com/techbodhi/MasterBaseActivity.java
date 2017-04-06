@@ -149,7 +149,7 @@ public class MasterBaseActivity extends AppCompatActivity
             startActivity(intent);
         }
         else if (id == R.id.approvePost) {
-            intent = new Intent(this, MainActivity.class);
+            intent = new Intent(this, ApprovePosts.class);
             startActivity(intent);
         }
         else if (id == R.id.logout) {
@@ -182,7 +182,8 @@ public class MasterBaseActivity extends AppCompatActivity
                     });
 
             alertDialogBuilder.setNegativeButton("No",
-                    new DialogInterface.OnClickListener() {
+                    new DialogInterface.OnClickListener()
+                    {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
 

@@ -7,7 +7,7 @@
             android:icon="@drawable/ic_leave_bal"
             android:title="Add Job Post"/>
         <item
-            android:id="@+id/viewPost"
+            android:id="@+id/UserPanelViewPost"
             android:icon="@drawable/ic_leave_bal"
             android:title="View Job Post" />
 

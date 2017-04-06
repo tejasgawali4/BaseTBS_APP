@@ -1,59 +1,512 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/edittext">
 
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:alignmentMode="alignBounds"
-        android:columnCount="4"
-        android:columnOrderPreserved="false"
-        android:useDefaultMargins="true"
-        android:layout_margin="0dp"
-        android:background="@drawable/edittext">
+<LinearLayout
 
-        <ImageView
+
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/feed_item_margin"
+    android:layout_marginRight="@dimen/feed_item_margin"
+    android:layout_marginTop="@dimen/feed_item_margin"
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp"
+    android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/feed_item_padding_left_right"
+        android:paddingRight="@dimen/feed_item_padding_left_right"
+        android:weightSum="2"
+        android:layout_weight="0.32"
+        android:padding="0dp">
+
+        <com.android.volley.toolbox.NetworkImageView
             android:id="@+id/profileuser"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_columnSpan="1"
-            android:layout_gravity="left"
-            android:layout_marginLeft="5dp"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="@dimen/feed_item_profile_pic"
+            android:layout_height="@dimen/feed_item_profile_pic"
+            android:scaleType="fitCenter"
+            android:background="@drawable/businessman">
+        </com.android.volley.toolbox.NetworkImageView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/feed_item_profile_info_padd"
+            android:layout_weight="1.23">
 
             <TextView
                 android:id="@+id/p_id"
-                android:layout_width="69dp"
-                android:layout_height="44dp"
-                android:paddingBottom="2dip"
-                android:layout_columnSpan="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/timestamp"
+                android:layout_weight="89.67"
+                android:textSize="@dimen/feed_item_timestamp" />
+
+            <TextView
+                android:id="@+id/companyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/feed_item_profile_name"
+                android:layout_weight="210.21"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:layout_weight="15.34"
+            android:paddingLeft="100dp"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top"
+            android:text="Date :"
+            android:elevation="1dp" />
+
+        <TextView
+            android:id="@+id/deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:layout_weight="30"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+    </LinearLayout>
+
+
+
+
+    <!-- Section  Main Details-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/select"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cropToPadding="true"
+                android:onClick="select Date"
+                android:src="@drawable/ic_experience"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/Experience"
+                android:layout_width="116dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:layout_gravity="center"
+                android:text="0-5 Years"/>
+
+
+            <ImageButton
+                android:id="@+id/vacancies1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cropToPadding="true"
+                android:onClick="selectDate"
+                android:src="@drawable/ic_vacancies"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/vacancies"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:layout_gravity="center"
+                android:text="5-10 vacancies"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/sal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:cropToPadding="true"
+                android:onClick="selectDate"
+                android:src="@drawable/ic_salary"
+                android:padding="10dp"/>
+
+            <TextView
+                android:id="@+id/salaryRange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:paddingBottom="5dp"
+                android:textColorLink="@color/link" />
+
+        </LinearLayout>
+
+</LinearLayout>
+
+
+    <!-- Section Job Discriptions -->
+    <TextView
+        android:id="@+id/jobDis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:textStyle="bold"
+        android:textColor="#2196f3"
+        android:text="Job Discriptions"
+        android:background="@drawable/bg_parent_corner"
+        android:gravity="center_vertical|center_horizontal"
+        android:padding="0dp"
+        android:layout_margin="10dp" />
+
+
+        <TextView
+            android:id="@+id/jobDiscription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:layout_margin="10dp" />
+
+
+
+        <LinearLayout
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/IndustryType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Industry Type :"
+                android:textStyle="bold"
+                android:paddingStart="0dp" />
+
+            <TextView
+                    android:id="@+id/indus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Information Technology"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+                <TextView
+                    android:id="@+id/Skill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Skills Required :"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/SkillsRequired"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                    android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                    android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:weightSum="1"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/loc"
+                android:layout_width="106dp"
+                android:layout_height="wrap_content"
+                android:text="Job Location :"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/JobLoction"
+                android:layout_width="281dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/other"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:text="Other Skills :"
                 android:textStyle="bold"/>
 
             <TextView
-            android:id="@+id/companyName"
-            android:layout_width="101dp"
-            android:layout_height="44dp"
-            android:paddingBottom="2dip"
-            android:layout_columnSpan="1"
+                android:id="@+id/OtherSkills"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/Resp"
+                android:layout_width="103dp"
+                android:layout_height="wrap_content"
+                android:text="Responsiblity :"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/Responsibility"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/testloc"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:text="Test Location :"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/testLocation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+
+    <!-- Section KeyWords-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="162dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/code"
+                android:layout_width="104dp"
+                android:layout_height="wrap_content"
+                android:text="Company Code :"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/CompanyCode"
+                android:layout_width="72dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/Criteria"
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:text="Percentage Criteria :"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/Percentage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:paddingBottom="5dp"
+                android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+                android:paddingRight="@dimen/feed_item_status_pad_left_right"
+                android:textColorLink="@color/link" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--Last Section-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <TextView
+            android:id="@+id/not"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:text="Note :"
             android:textStyle="bold"/>
 
-        <Button
-            android:id="@+id/btnViewPostDetails"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/Note"
+            android:layout_width="266dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/button"
-            android:text="Modify"
-            android:layout_alignParentRight="true"
-            android:layout_gravity="right"
-            android:layout_columnSpan="1"
-            android:layout_margin="10dp"
-            android:onClick="ViewPostDetails"/>
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top" />
 
-    </GridLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp">
+
+        <TextView
+            android:id="@+id/process"
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:text="Interview Process :"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/InterviewProcess"
+            android:layout_width="252dp"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:textColorLink="@color/link" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/profile"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:text="Compnay Profile :"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/companyProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:paddingTop="@dimen/feed_item_status_pad_top" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnViewPostDetails"
+        android:layout_width="304dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:text="Modify"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="right"
+        android:paddingBottom="15dp"
+        android:onClick="ViewPostDetails"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center" />
 
 </LinearLayout>

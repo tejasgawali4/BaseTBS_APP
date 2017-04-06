@@ -17,36 +17,36 @@ import java.util.HashMap;
 
 import static android.widget.Toast.LENGTH_LONG;
 
-public class ViewPosts extends AppCompatActivity
+public class UserPanelViewPost extends AppCompatActivity
 {
     private ProgressDialog pDialog;
     ListView postListView;
-    public ViewPosts CustomViewPost = null;
+    public UserPanelViewPost CustomViewPost = null;
     public ArrayList<HashMap<String,String>> CustomListPostViewArray;
-    ViewPostAdapter adapter;
+    UserPanelViewPostAdapter adapter;
     Resources res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_viewpost);
+        setContentView(R.layout.userpanelviewpost);
 
         CustomViewPost = this;
 
-        pDialog = new ProgressDialog(ViewPosts.this);
+        pDialog = new ProgressDialog(UserPanelViewPost.this);
 
         CustomListPostViewArray = new ArrayList<>();
 
         res = getResources();
 
-        postListView= (ListView) findViewById(R.id.viewpost);
+        postListView= (ListView) findViewById(R.id.UserPanelViewPost);
 
         new ViewPost().execute();
     }
 
     public void onItemClick(int mPostion)
     {
-     // Toast.makeText(getApplicationContext(),"mPostion" +mPostion, LENGTH_LONG).show();
+         Toast.makeText(getApplicationContext(),"in UserPanelViewPost mPostion" +mPostion, LENGTH_LONG).show();
     }
 
 
@@ -60,7 +60,7 @@ public class ViewPosts extends AppCompatActivity
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(ViewPosts.this);
+            pDialog = new ProgressDialog(UserPanelViewPost.this);
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
@@ -74,7 +74,7 @@ public class ViewPosts extends AppCompatActivity
             // Making a request to url and getting response
             String jsonStr = sh.sendGetRequest(Config.URL_VIEW_POSTS);
 
-           // Log.e(TAG, "Response from url: " + jsonStr);
+            // Log.e(TAG, "Response from url: " + jsonStr);
 
             if (jsonStr != null){
                 try {
@@ -134,7 +134,7 @@ public class ViewPosts extends AppCompatActivity
                         CustomListPostViewArray.add(Post);
                     }
                 } catch (final JSONException e) {
-                   // Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    // Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -165,7 +165,7 @@ public class ViewPosts extends AppCompatActivity
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
-            adapter = new ViewPostAdapter(CustomViewPost, CustomListPostViewArray, res);
+            adapter = new UserPanelViewPostAdapter(CustomViewPost, CustomListPostViewArray, res);
 
             postListView.setAdapter(adapter);
 

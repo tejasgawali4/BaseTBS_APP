@@ -21,6 +21,7 @@ import java.util.HashMap;
 /**
  * Created by Carl_johnson on 12/5/2016.
  */
+
 public class ViewUsers extends AppCompatActivity {
 
     private String TAG = ViewPosts.class.getSimpleName();
@@ -81,7 +82,7 @@ public class ViewUsers extends AppCompatActivity {
                         JSONObject jsonResponce = result.getJSONObject(i);
 
                         String uid=jsonResponce.getString("u_id");
-                        String firstname = jsonResponce.getString("u_firstname");
+                        String firstname = jsonResponce.getString("u_fisrtname");
                         String lastname = jsonResponce.getString("u_lastname");
                         btnViewUserDeatils = (Button) findViewById(R.id.btnViewUserDeatils);
 

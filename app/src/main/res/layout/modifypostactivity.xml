@@ -12,6 +12,7 @@
     tools:context="cj46.tejas.com.techbodhi.ModifyPostActivity">
 
 
+
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

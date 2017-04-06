@@ -26,10 +26,10 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
 {
 
     public EditText pid , pcompanyName ,pNote , pDeadline ,
-                    pCompanyProfile, pCompanyCode ,pJobDiscription,
-                    pOtherSkills, pResponsibilty , pSkilledRequired ,
-                    pPercentageCriteria , pSalaryRange , pInterviewProcess ,
-                    pjoblocation , PTestlocation;
+            pCompanyProfile, pCompanyCode ,pJobDiscription,
+            pOtherSkills, pResponsibilty , pSkilledRequired ,
+            pPercentageCriteria , pSalaryRange , pInterviewProcess ,
+            pjoblocation , PTestlocation;
 
     public Button btnUpdatePost;
 
@@ -87,7 +87,7 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (btnUpdatePost == v)
         {
-             updatePost();
+            updatePost();
         }
     }
 
@@ -131,21 +131,21 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
                     {
                         JSONObject jsonResponce = result.getJSONObject(i);
 
-                         companyId = jsonResponce.getString("p_id");
-                         companyName = jsonResponce.getString("p_companyName");
-                         companyNote = jsonResponce.getString("p_note");
-                         companyDeadline = jsonResponce.getString("p_deadline");
-                         companyProfile = jsonResponce.getString("p_companyProfile");
-                         companyCode = jsonResponce.getString("p_companyCode");
-                         jobDescription = jsonResponce.getString("p_jobDescription");
-                         otherSkills = jsonResponce.getString("p_otherSkills");
-                         responsibility = jsonResponce.getString("p_responsibility");
-                         skillsRequired = jsonResponce.getString("p_skillsRequired");
-                         percentageCriteria = jsonResponce.getString("p_percentageCriteria");
-                         salaryRange = jsonResponce.getString("p_salaryRange");
-                         interviewProcess = jsonResponce.getString("p_interviewProcess");
-                         jobLocation = jsonResponce.getString("p_jobLocation");
-                         testLocation = jsonResponce.getString("p_testLocation");
+                        companyId = jsonResponce.getString("p_id");
+                        companyName = jsonResponce.getString("p_companyName");
+                        companyNote = jsonResponce.getString("p_note");
+                        companyDeadline = jsonResponce.getString("p_deadline");
+                        companyProfile = jsonResponce.getString("p_companyProfile");
+                        companyCode = jsonResponce.getString("p_companyCode");
+                        jobDescription = jsonResponce.getString("p_jobDescription");
+                        otherSkills = jsonResponce.getString("p_otherSkills");
+                        responsibility = jsonResponce.getString("p_responsibility");
+                        skillsRequired = jsonResponce.getString("p_skillsRequired");
+                        percentageCriteria = jsonResponce.getString("p_percentageCriteria");
+                        salaryRange = jsonResponce.getString("p_salaryRange");
+                        interviewProcess = jsonResponce.getString("p_interviewProcess");
+                        jobLocation = jsonResponce.getString("p_jobLocation");
+                        testLocation = jsonResponce.getString("p_testLocation");
 
                         System.out.println("companyId:"+ companyId + "companyName:" + companyName + "companyNote:" + companyNote +
                                 "companyDeadline:" +companyDeadline + "companyProfile:"+companyProfile + "companyCode:"+companyCode+
@@ -154,7 +154,6 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
                                 "interviewProcess:"+interviewProcess+"jobLocation:"+jobLocation+"testLocation:"+testLocation);
 
 /*                        HashMap<String , String> Post = new HashMap<>();
-
                         Post.put(Config.KEY_POST_ID,companyId);
                         Post.put(Config.KEY_COMPANYNAME,companyName);
                         Post.put(Config.KEY_NOTE, companyNote);
@@ -170,7 +169,6 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
                         Post.put(Config.KEY_INTERVIEWPROCESS,interviewProcess);
                         Post.put(Config.KEY_JOBLOCATION,jobLocation);
                         Post.put(Config.KEY_TESTLOCATION,testLocation);
-
                         ViewPostArray.add(Post);*/
 
                     }
@@ -220,8 +218,6 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
             pInterviewProcess.setText(interviewProcess);
             pjoblocation.setText(jobLocation);
             PTestlocation.setText(testLocation);
-
-
 
         }
 
@@ -292,4 +288,3 @@ public class ViewPostDetails extends AppCompatActivity implements View.OnClickLi
         obj.execute();
     }
 }
-
